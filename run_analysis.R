@@ -65,8 +65,9 @@ colnames(DFTrain) <- featureNames
 ## Retain only columns with -mean() or -std() in the variable name
 DTrainFin <- DFTrain[, grep("-mean[[:punct:]]|-std[[:punct:]]",names(DFTrain))]
 
-## Remove parentheses from column names
+## Remove parentheses and dashes from column names
 colnames(DTrainFin) <- gsub(pattern = "\\(|)", replacement = "", x = names(DTrainFin))
+colnames(DTrainFin) <- gsub(pattern = "\\-", replacement = "", x = names(DTrainFin))
 
 ## Create an explicit variable to store the sequential row position as 
 ## an integer for merging
@@ -123,8 +124,9 @@ colnames(DFTest) <- featureNames  ## attach column names to top of performance d
 ## Retain only columns with -mean() or -std() in the variable name
 DTestFin <- DFTest[, grep("-mean[[:punct:]]|-std[[:punct:]]",names(DFTest))]
 
-## Remove parentheses from column names
+## Remove parentheses and dashes from column names
 colnames(DTestFin) <- gsub(pattern = "\\(|)", replacement = "", x = names(DTestFin))
+colnames(DTestFin) <- gsub(pattern = "\\-", replacement = "", x = names(DTestFin))
 
 ## Create an explicit variable to store the sequential row position as 
 ## an integer for merging
@@ -148,7 +150,6 @@ FinalData$activity[FinalData$activity == "5"] <- "STANDING"
 FinalData$activity[FinalData$activity == "6"] <- "LAYING"
 ## convert activity to factor vector to be used in the rest of the scripts below
 FinalData$activity <- as.factor(FinalData$activity)
-tail(FinalData,2)
 
 ## Although not requifred by this exercise, Write tidy data set created up to this point for
 ## possible future analysis
